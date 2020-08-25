@@ -1,5 +1,4 @@
 package com.deansolecki.doordashlite.api;
 
-public class DoorDashService {
-
+public interface DoorDashEndpoints {
 }
