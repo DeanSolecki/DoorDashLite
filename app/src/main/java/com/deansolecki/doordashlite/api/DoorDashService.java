@@ -4,6 +4,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DoorDashService {
+    public static final String LAT = "37.422740";
+    public static final String LNG = "-122.139956";
     private static DoorDashApi mDoorDashApi;
 
     public static DoorDashApi getApi() {

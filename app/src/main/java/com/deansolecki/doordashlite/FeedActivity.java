@@ -9,7 +9,7 @@ public class FeedActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new FeedFragment();
+        return FeedFragment.newInstance();
     }
 
     @Override
