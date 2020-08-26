@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.deansolecki.doordashlite.models.RestaurantStore;
 import com.deansolecki.doordashlite.viewholders.RestaurantHolder;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,9 +65,8 @@ public class FeedFragment extends Fragment {
         binding.feedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRestaurantAdapter = new RestaurantAdapter(mRestaurants);
         binding.feedRecyclerView.setAdapter(mRestaurantAdapter);
-        mProgressBar = binding.progressBar;
 
-        Log.d(TAG, "onCreateView");
+        mProgressBar = binding.progressBar;
 
         loadRestaurants();
 
@@ -90,6 +92,12 @@ public class FeedFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RestaurantHolder holder, int position) {
             Restaurant restaurant = mRestaurants.get(position);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    launchDetailFragment(position);
+                }
+            });
             holder.bind(restaurant);
         }
 
@@ -123,5 +131,15 @@ public class FeedFragment extends Fragment {
                         Log.e(TAG, "Failed to reach API.", t);
                     }
                 });
+    }
+
+    private void launchDetailFragment(int position) {
+        DetailFragment detailFragment = DetailFragment.newInstance(position);
+        FragmentManager fragmentManager =
+                Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, detailFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

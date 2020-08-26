@@ -11,9 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="?android:listSeparatorTextViewStyle"
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onButtonClicked()">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/image_view"
@@ -42,6 +42,7 @@
             android:text="@{viewModel.restaurant.business.name}"
             android:textColor="@android:color/black"
             android:textStyle="bold"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/status_text"
             app:layout_constraintHorizontal_bias="0.0"
@@ -59,7 +60,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            android:text="@{viewModel.restaurant.tags[0]}"
+            android:text="@{viewModel.restaurant.description}"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/status_text"
             app:layout_constraintHorizontal_bias="0.0"

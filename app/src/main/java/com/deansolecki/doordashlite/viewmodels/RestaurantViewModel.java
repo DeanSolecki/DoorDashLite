@@ -1,5 +1,7 @@
 package com.deansolecki.doordashlite.viewmodels;
 
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.databinding.BaseObservable;
@@ -11,15 +13,26 @@ import com.squareup.picasso.Picasso;
 
 public class RestaurantViewModel extends BaseObservable {
     private Restaurant mRestaurant;
+    private View.OnClickListener mOnClickListener;
+
 
     @Bindable
     public Restaurant getRestaurant() {
         return mRestaurant;
     }
 
+    @Bindable
+    public View.OnClickListener getOnClickListener() {
+        return mOnClickListener;
+    }
+
     public void setRestaurant(Restaurant restaurant) {
         mRestaurant = restaurant;
         notifyChange();
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
     }
 
     @BindingAdapter("imageUrl")
@@ -32,9 +45,5 @@ public class RestaurantViewModel extends BaseObservable {
                 .resize(200, 200)
                 .centerInside()
                 .into(view);
-    }
-
-    public void onButtonClicked() {
-
     }
 }
