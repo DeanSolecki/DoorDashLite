@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ public class FeedFragment extends Fragment {
 
     private List<Restaurant> mRestaurants;
     private RestaurantAdapter mRestaurantAdapter;
+    private ContentLoadingProgressBar mProgressBar;
 
     public static FeedFragment newInstance() {
 
@@ -60,6 +62,7 @@ public class FeedFragment extends Fragment {
         binding.feedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRestaurantAdapter = new RestaurantAdapter(mRestaurants);
         binding.feedRecyclerView.setAdapter(mRestaurantAdapter);
+        mProgressBar = binding.progressBar;
 
         Log.d(TAG, "onCreateView");
 
@@ -97,6 +100,10 @@ public class FeedFragment extends Fragment {
     }
 
     private void loadRestaurants() {
+        if(mRestaurants.size() > 0) {
+            mProgressBar.hide();
+            return;
+        }
         DoorDashService.getApi().getRestaurants(DoorDashService.LAT, DoorDashService.LNG)
                 .enqueue(new Callback<List<Restaurant>>() {
                     @Override
@@ -106,6 +113,7 @@ public class FeedFragment extends Fragment {
                             mRestaurants = response.body();
                             RestaurantStore.setRestaurants(mRestaurants);
                             mRestaurantAdapter.notifyDataSetChanged();
+                            mProgressBar.hide();
                         }
                         Log.d(TAG, "Successfully loaded restaurants: " + mRestaurants);
                     }

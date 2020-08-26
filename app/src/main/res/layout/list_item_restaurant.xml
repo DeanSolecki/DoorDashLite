@@ -7,9 +7,6 @@
         <variable
             name="viewModel"
             type="com.deansolecki.doordashlite.viewmodels.RestaurantViewModel" />
-        <variable
-            name="picasso"
-            type="com.squareup.picasso.Picasso" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
