@@ -36,7 +36,7 @@ public class RestaurantViewModel extends BaseObservable {
 
     @BindingAdapter("imageUrl")
     public static void loadImage(ImageView view, String url) {
-        if(url == null || url.length() == 0) {
+        if(url == null || url.length() == 0 || view == null) {
             return;
         }
         Picasso.get()
@@ -48,7 +48,7 @@ public class RestaurantViewModel extends BaseObservable {
 
     @BindingAdapter("imageUrlLarge")
     public static void loadImageLarge(ImageView view, String url) {
-        if(url == null || url.length() == 0) {
+        if(url == null || url.length() == 0 || view == null) {
             return;
         }
         Picasso.get()

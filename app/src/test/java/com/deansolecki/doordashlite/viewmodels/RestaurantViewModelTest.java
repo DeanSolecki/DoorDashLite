@@ -34,4 +34,16 @@ public class RestaurantViewModelTest {
     public void getOnClickListener() {
         assertThat(mOnClickListener, is(mSubject.getOnClickListener()));
     }
+
+    @Test
+    public void loadImage() {
+        // Should not fail on null values.
+        RestaurantViewModel.loadImage(null, null);
+    }
+
+    @Test
+    public void loadImageLarge() {
+        // Should not fail on null values.
+        RestaurantViewModel.loadImageLarge(null, null);
+    }
 }
