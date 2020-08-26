@@ -30,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressWarnings("NullableProblems")
 public class FeedFragment extends Fragment {
     private static final String TAG = "FeedFragment";
 
@@ -74,7 +75,7 @@ public class FeedFragment extends Fragment {
     }
 
     private class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder> {
-        private List<Restaurant> mRestaurants;
+        private final List<Restaurant> mRestaurants;
 
         public RestaurantAdapter(List<Restaurant> restaurants) {
             mRestaurants = restaurants;
@@ -92,12 +93,7 @@ public class FeedFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull RestaurantHolder holder, int position) {
             Restaurant restaurant = mRestaurants.get(position);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    launchDetailFragment(position);
-                }
-            });
+            holder.itemView.setOnClickListener(view -> launchDetailFragment(position));
             holder.bind(restaurant);
         }
 

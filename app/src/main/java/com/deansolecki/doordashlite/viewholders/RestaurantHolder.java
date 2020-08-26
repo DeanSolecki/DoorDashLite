@@ -8,7 +8,7 @@ import com.deansolecki.doordashlite.models.Restaurant;
 import com.deansolecki.doordashlite.viewmodels.RestaurantViewModel;
 
 public class RestaurantHolder extends RecyclerView.ViewHolder {
-    private ListItemRestaurantBinding mBinding;
+    private final ListItemRestaurantBinding mBinding;
 
     public RestaurantHolder(@NonNull ListItemRestaurantBinding binding) {
         super(binding.getRoot());
