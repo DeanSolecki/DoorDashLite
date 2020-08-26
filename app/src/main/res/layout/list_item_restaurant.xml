@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="?android:listSeparatorTextViewStyle"
-        android:id="@+id/constraint_layout"
+        android:id="@+id/item_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
