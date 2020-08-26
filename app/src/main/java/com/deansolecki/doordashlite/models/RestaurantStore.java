@@ -27,7 +27,8 @@ public class RestaurantStore {
         if(mRestaurantStore == null) {
             mRestaurantStore = new RestaurantStore();
         }
-        mRestaurants = restaurants;
+        mRestaurants.clear();
+        mRestaurants.addAll(restaurants);
     }
 
     private RestaurantStore() {

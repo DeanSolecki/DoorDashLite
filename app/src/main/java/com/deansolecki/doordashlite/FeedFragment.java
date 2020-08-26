@@ -22,7 +22,6 @@ import com.deansolecki.doordashlite.viewholders.RestaurantHolder;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +30,7 @@ public class FeedFragment extends Fragment {
     private static final String TAG = "FeedFragment";
 
     private List<Restaurant> mRestaurants;
+    private RestaurantAdapter mRestaurantAdapter;
 
     public static FeedFragment newInstance() {
 
@@ -41,6 +41,15 @@ public class FeedFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if(mRestaurants == null) {
+            mRestaurants = RestaurantStore.getRestaurants();
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,7 +58,8 @@ public class FeedFragment extends Fragment {
                 .inflate(inflater, R.layout.fragment_feed, container, false);
 
         binding.feedRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.feedRecyclerView.setAdapter(new RestaurantAdapter());
+        mRestaurantAdapter = new RestaurantAdapter(mRestaurants);
+        binding.feedRecyclerView.setAdapter(mRestaurantAdapter);
 
         Log.d(TAG, "onCreateView");
 
@@ -59,6 +69,11 @@ public class FeedFragment extends Fragment {
     }
 
     private class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder> {
+        private List<Restaurant> mRestaurants;
+
+        public RestaurantAdapter(List<Restaurant> restaurants) {
+            mRestaurants = restaurants;
+        }
 
         @NonNull
         @Override
@@ -71,28 +86,18 @@ public class FeedFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull RestaurantHolder holder, int position) {
-
+            Restaurant restaurant = mRestaurants.get(position);
+            holder.bind(restaurant);
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mRestaurants.size();
         }
     }
 
     private void loadRestaurants() {
         DoorDashService.getApi().getRestaurants(DoorDashService.LAT, DoorDashService.LNG)
-//                .enqueue(new Callback<ResponseBody>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                        Log.d(TAG, response.toString());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//                    }
-//                });
                 .enqueue(new Callback<List<Restaurant>>() {
                     @Override
                     public void onResponse(Call<List<Restaurant>> call,
@@ -100,6 +105,7 @@ public class FeedFragment extends Fragment {
                         if(response.isSuccessful()) {
                             mRestaurants = response.body();
                             RestaurantStore.setRestaurants(mRestaurants);
+                            mRestaurantAdapter.notifyDataSetChanged();
                         }
                         Log.d(TAG, "Successfully loaded restaurants: " + mRestaurants);
                     }
