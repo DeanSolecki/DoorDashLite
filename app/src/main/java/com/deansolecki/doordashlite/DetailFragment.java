@@ -1,8 +1,6 @@
 package com.deansolecki.doordashlite;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.deansolecki.doordashlite.databinding.FragmentDetailBinding;
-import com.deansolecki.doordashlite.models.Restaurant;
 import com.deansolecki.doordashlite.models.RestaurantStore;
 import com.deansolecki.doordashlite.viewmodels.RestaurantViewModel;
 

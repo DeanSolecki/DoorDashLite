@@ -1,6 +1,5 @@
 package com.deansolecki.doordashlite.viewmodels;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -44,6 +43,16 @@ public class RestaurantViewModel extends BaseObservable {
                 .load(url)
                 .resize(200, 200)
                 .centerInside()
+                .into(view);
+    }
+
+    @BindingAdapter("imageUrlLarge")
+    public static void loadImageLarge(ImageView view, String url) {
+        if(url == null || url.length() == 0) {
+            return;
+        }
+        Picasso.get()
+                .load(url)
                 .into(view);
     }
 }

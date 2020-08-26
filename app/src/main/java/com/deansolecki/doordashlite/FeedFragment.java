@@ -123,7 +123,6 @@ public class FeedFragment extends Fragment {
                             mRestaurantAdapter.notifyDataSetChanged();
                             mProgressBar.hide();
                         }
-                        Log.d(TAG, "Successfully loaded restaurants: " + mRestaurants);
                     }
 
                     @Override
