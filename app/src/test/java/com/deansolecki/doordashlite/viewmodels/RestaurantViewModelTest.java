@@ -17,7 +17,7 @@ public class RestaurantViewModelTest {
     private RestaurantViewModel mSubject;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mOnClickListener = mock(View.OnClickListener.class);
         mRestaurant = mock(Restaurant.class);
         mSubject = new RestaurantViewModel();
