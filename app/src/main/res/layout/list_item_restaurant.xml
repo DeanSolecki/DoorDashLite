@@ -52,25 +52,21 @@
             app:layout_constraintVertical_bias="1.0"
             tools:text="business_name" />
 
-        <TextView
-            android:id="@+id/tag_text"
+
+        <CheckBox
+            android:id="@+id/favorite_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="@{viewModel.restaurant.description}"
-            android:ellipsize="end"
-            android:maxLines="3"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/status_text"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:checked="@{viewModel.restaurant.is_favorite}"
+            android:onClick="@{() -> viewModel.setFavorite(viewModel.restaurant.id, !viewModel.getFavorite())}"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/image_view"
-            app:layout_constraintTop_toBottomOf="@id/guideline"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/status_text"
@@ -81,6 +77,7 @@
             android:layout_marginBottom="16dp"
             android:text="@{viewModel.restaurant.status}"
             android:textColor="@android:color/black"
+            tools:text="status text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

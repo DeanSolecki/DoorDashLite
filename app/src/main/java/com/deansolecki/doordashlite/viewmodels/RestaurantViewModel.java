@@ -8,6 +8,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
 
 import com.deansolecki.doordashlite.models.Restaurant;
+import com.deansolecki.doordashlite.models.RestaurantStore;
 import com.squareup.picasso.Picasso;
 
 public class RestaurantViewModel extends BaseObservable {
@@ -32,6 +33,16 @@ public class RestaurantViewModel extends BaseObservable {
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         mOnClickListener = onClickListener;
+    }
+
+    public void setFavorite(int id, boolean favorite) {
+        RestaurantStore.storeFavorite(id, favorite);
+        notifyChange();
+    }
+
+    @Bindable
+    public boolean getFavorite() {
+        return mRestaurant.is_favorite;
     }
 
     @BindingAdapter("imageUrl")

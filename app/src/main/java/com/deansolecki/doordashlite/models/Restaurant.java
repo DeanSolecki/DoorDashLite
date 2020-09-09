@@ -35,4 +35,5 @@ public class Restaurant{
     public double service_rate;
     public Object promotion;
     public Object featured_category_description;
+    public boolean is_favorite;
 }

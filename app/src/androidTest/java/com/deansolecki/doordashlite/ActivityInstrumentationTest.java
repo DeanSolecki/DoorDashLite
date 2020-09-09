@@ -1,8 +1,6 @@
 package com.deansolecki.doordashlite;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.contrib.RecyclerViewActions;
